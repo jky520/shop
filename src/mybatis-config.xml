@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 读取数据库连接的配置文件 jdbc.properties -->
+	<properties resource="jdbc.properties"/>
+	
+	<typeAliases>
+		<!-- <typeAlias type="com.hauxin.shop.entity.User" alias="user"/> 这种方式：有多少实体需要自己配多少（麻烦） -->
+		<!-- 推荐使用下面的方式给类加别名（只需要配置一行代码），但此时的别名就只能是类名 -->
+		<package name="com.hauxin.shop.entity"/>
+	</typeAliases>
+	
+	<!-- 环境的配置，默认是开发环境 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/><!-- 事物管理器 -->
+			<dataSource type="POOLED"> <!-- 数据源的配置 -->
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+		<!-- <environment id="product"> // 产品环境
+		</environment> -->
+	</environments>
+	
+	
+	<!-- 将mapper文件加入到配置文件中 -->
+	<mappers>
+		<mapper resource="com/hauxin/shop/entity/userMapper.xml"/>
+		<!-- 只使用接口+annotation方式如下配置即可 -->
+		<!-- <mapper class="com.hauxin.shop.dao.UserDao"/> -->
+	</mappers>
+</configuration>
